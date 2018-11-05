@@ -1,4 +1,4 @@
-+## Feature 
+## Feature 
    descriptive text of what is desired
 ## Scenario
 -  **Given** some precondition
