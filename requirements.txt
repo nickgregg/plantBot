@@ -1,13 +1,7 @@
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
-# platform: osx-64
 APScheduler==3.5.3
 certifi==2018.10.15
-pip==18.1
 pytz==2018.7
-setuptools==40.6.2
 six==1.11.0
 SQLAlchemy==1.2.14
 tornado==5.1.1
 tzlocal==1.5.1
-wheel==0.32.3
