@@ -16,7 +16,13 @@ from apscheduler.schedulers.tornado import TornadoScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor
 
+import i2c
 
+#Create instance of  Atlas Device
+device = i2c.AtlasI2C()
+
+#Set i2c Address
+device.set_i2c_address(99)
 
 def counter(timer_in_seconds):
     """
@@ -34,7 +40,9 @@ def counter(timer_in_seconds):
     time_limit = datetime.now() + timedelta(seconds=timer_in_seconds)
 
     while time_limit > datetime.now():
-        print(time_limit-datetime.now())
+        #print(time_limit-datetime.now())
+        print(device.query("R"))
+
     return # break out and return to the calling function
 
 def tick():
