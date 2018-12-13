@@ -9,6 +9,7 @@ import tornado.ioloop
 import tornado.web
 from time import localtime, strftime
 import os
+import Adafruit_DHT
 
 from datetime import datetime, timedelta
 from pytz import utc
@@ -65,7 +66,7 @@ def sensorTimerA():
 
 def humidityTempRead():
     #where 22 is the sensor & 4 is GPIO
-    humidity, temperature = humidity.Adafruit_DHT.read_retry(22, 4)
+    humidity, temperature = Adafruit_DHT.read_retry(22, 4)
 
     if humidity is not None and temperature is not None:
         print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
