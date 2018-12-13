@@ -17,6 +17,7 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor
 
 import i2c
+import humidity
 
 #Create instance of  Atlas Device
 device = i2c.AtlasI2C()
@@ -62,6 +63,19 @@ def sensorTimerA():
     counter(5)
     readSensor(99)
 
+def humidityTempRead():
+    #where 22 is the sensor & 4 is GPIO
+    humidity, temperature = Adafruit_DHT.read_retry(22, 4)
+
+    if humidity is not None and temperature is not None:
+        print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
+    else:
+        print('Failed to get reading. Try again!')
+        # sys.exit(1)
+
+    pass
+
+
 jobstores = {
     'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
 }
@@ -91,6 +105,7 @@ if __name__== '__main__':
     # alarm_time = datetime.now() + timedelta(seconds=10)
     scheduler.add_job(tick, 'interval', seconds=12)
     scheduler.add_job(sensorTimerA, 'interval', seconds=19)
+    scheduler.add_job(humidityTempRead, 'interval', seconds=10)
     print('To clear the alarms, delete the example.sqlite file.')
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
     scheduler.configure(
