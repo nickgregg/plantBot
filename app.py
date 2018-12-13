@@ -18,7 +18,7 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor
 
 import i2c
-import humidity
+# import humidity
 
 #Create instance of  Atlas Device
 device = i2c.AtlasI2C()
